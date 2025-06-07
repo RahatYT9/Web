@@ -1,1 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Universal Box Sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Primary font for body */
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); /* Energetic, vibrant gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent scrollbar during transitions */
+    position: relative; /* For abstract background elements */
+}
+
+/* Abstract Background Shapes (for extra visual flair) */
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px); /* Soft blur */
+    opacity: 0.7;
+    animation: floatEffect 15s infinite ease-in-out alternate; /* Gentle floating animation */
+}
+
+body::before {
+    background: rgba(255, 204, 0, 0.4); /* Yellowish orb */
+    width: 250px;
+    height: 250px;
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+body::after {
+    background: rgba(132, 94, 194, 0.4); /* Purplish orb */
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+@keyframes floatEffect {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(20px, 30px) scale(1.05);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+
+.container {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white for a clean look */
+    border-radius: 25px; /* More rounded corners */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), /* Stronger, deeper shadow */
+                0 0 0 1px rgba(255, 255, 255, 0.6); /* Subtle inner white border for depth */
+    position: relative;
+    overflow: hidden;
+    width: 800px; /* Slightly wider */
+    max-width: 90%;
+    min-height: 520px; /* Slightly taller */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+/* Form Panel Styling */
+.form-panel {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.7s ease-in-out; /* Slower, smoother transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure vertical alignment */
+}
+
+.login-panel {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+    padding: 0 50px; /* Consistent padding */
+}
+
+.container.right-panel-active .login-panel {
+    transform: translateX(100%);
+}
+
+.sign-up-panel {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+    padding: 0 50px; /* Consistent padding */
+}
+
+.container.right-panel-active .sign-up-panel {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: showForm 0.6s forwards; /* Use forwards to keep the end state */
+}
+
+@keyframes showForm {
+    0% {
+        opacity: 0;
+        transform: translateX(100%) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(100%) scale(1);
+    }
+}
+
+/* Form Styling */
+form {
+    background-color: transparent; /* Forms should be transparent to show container backdrop */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Ensure form takes full width of its panel */
+}
+
+form h2 {
+    font-family: 'Montserrat', sans-serif; /* Bolder font for headings */
+    font-weight: 800; /* Extra bold */
+    margin-bottom: 25px;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
+}
+
+/* Social Login Buttons */
+.social-login {
+    margin: 20px 0;
+    display: flex; /* Arrange buttons nicely */
+    gap: 10px; /* Space between buttons */
+}
+
+.social-btn {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 50%; /* Perfect circles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px; /* Slightly larger */
+    width: 45px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    color: #555;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Deeper shadow on hover */
+}
+
+/* Specific Social Button Colors (for consistency) */
+.social-btn.google {
+    background-color: #DB4437; /* Google red */
+    color: white;
+    border-color: #DB4437;
+}
+.social-btn.google:hover {
+    background-color: #C23321;
+}
+
+.social-btn.facebook {
+    background-color: #4267B2; /* Facebook blue */
+    color: white;
+    border-color: #4267B2;
+}
+.social-btn.facebook:hover {
+    background-color: #365899;
+}
+
+
+form span {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 20px; /* More space */
+}
+
+/* Input Field Styling */
+form input {
+    background-color: #f0f0f0; /* Lighter background */
+    border: none;
+    padding: 14px 20px; /* More padding */
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 10px; /* More rounded input fields */
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05); /* Inner shadow for depth */
+}
+
+form input:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px #4ECDC4, inset 2px 2px 5px rgba(0,0,0,0.1); /* Highlight with main accent color */
+}
+
+/* Forgot Password Link */
+form a {
+    color: #555;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 25px; /* More spacing */
+    transition: color 0.3s ease;
+}
+
+form a:hover {
+    color: #4ECDC4; /* Highlight on hover */
+}
+
+/* Form Buttons */
+form button {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4); /* Gradient button */
+    border: none; /* No border for gradient buttons */
+    border-radius: 30px; /* More rounded */
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 50px; /* More padding */
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Lifted shadow */
+}
+
+form button:active {
+    transform: scale(0.98); /* Less aggressive click effect */
+}
+
+form button:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.4); /* More pronounced shadow and subtle white outline */
+    background: linear-gradient(45deg, #4ECDC4, #FF6B6B); /* Reverse gradient on hover */
+}
+
+/* Overlay Panel Styling */
+.overlay-panel {
+    background: linear-gradient(to right, #4ECDC4, #FF6B6B); /* Gradient matching the body's main colors */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.7s ease-in-out; /* Slower, smoother transition */
+    z-index: 100;
+    border-radius: 0 25px 25px 0; /* Match container border-radius */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2); /* Subtle inner white border */
+}
+
+.container.right-panel-active .overlay-panel {
+    transform: translateX(-100%);
+    border-radius: 25px 0 0 25px; /* Adjust radius on active state */
+}
+
+/* Overlay Content (left/right) */
+.overlay-panel .overlay-left,
+.overlay-panel .overlay-right {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.7s ease-in-out; /* Slower, smoother transition */
+}
+
+.overlay-panel .overlay-left {
+    transform: translateX(-20%); /* Initial slight shift */
+}
+
+.container.right-panel-active .overlay-panel .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-panel .overlay-right {
+    right: 0;
+    transform: translateX(0); /* Initial slight shift */
+}
+
+.container.right-panel-active .overlay-panel .overlay-right {
+    transform: translateX(20%);
+}
+
+.overlay-panel h1 {
+    font-family: 'Montserrat', sans-serif; /* Bolder font for headings */
+    font-weight: 800; /* Extra bold */
+    margin: 0;
+    font-size: 2.8em; /* Larger headings */
+    line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* More prominent shadow */
+}
+
+.overlay-panel p {
+    font-size: 15px; /* Slightly larger text */
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.8px; /* More letter spacing for readability */
+    margin: 25px 0 35px; /* More spacing */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Ghost Buttons (on overlay) */
+.overlay-panel button.ghost {
+    background-color: transparent;
+    border: 2px solid #FFFFFF; /* Thicker border */
+    color: #FFFFFF;
+    margin-top: 20px;
+    padding: 15px 50px; /* Match main buttons */
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+.overlay-panel button.ghost:hover {
+    background-color: rgba(255, 255, 255, 0.25); /* More visible transparent background */
+    border-color: rgba(255, 255, 255, 0.8); /* Slightly more opaque border */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 800px) { /* Adjust breakpoint for a slightly wider container */
+    .container {
+        min-height: 650px; /* Taller on mobile */
+        flex-direction: column; /* Stack elements vertically */
+        border-radius: 15px; /* Smaller radius for mobile */
+        max-width: 95%; /* More width utilization */
+    }
+
+    .form-panel {
+        width: 100%;
+        height: auto;
+        position: relative; /* Adjust position for stacking */
+        transform: none !important; /* Override JS transform */
+        padding: 40px 30px; /* More compact padding */
+    }
+
+    .login-panel, .sign-up-panel {
+        /* Already handled by .form-panel padding */
+    }
+
+    .overlay-panel {
+        position: relative;
+        left: 0;
+        top: auto;
+        width: 100%;
+        height: 250px; /* Adjust height for mobile overlay */
+        border-radius: 0 0 15px 15px; /* Adjust radius for bottom overlay */
+        transform: none !important; /* Override JS transform */
+        background: linear-gradient(to bottom, #4ECDC4, #FF6B6B); /* Vertical gradient for mobile */
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .container.right-panel-active .overlay-panel {
+        border-radius: 15px 15px 0 0; /* Adjust radius for top overlay */
+        background: linear-gradient(to top, #4ECDC4, #FF6B6B); /* Reverse vertical gradient for mobile */
+    }
+
+    .overlay-panel .overlay-left,
+    .overlay-panel .overlay-right {
+        width: 100%;
+        position: relative;
+        transform: none !important; /* Override JS transform */
+        opacity: 0; /* Hide one by default, show based on active state */
+        transition: opacity 0.4s ease; /* Smooth fade for overlay content */
+    }
+
+    .container.right-panel-active .overlay-panel .overlay-left {
+        opacity: 1; /* Show left on active */
+    }
+
+    .container:not(.right-panel-active) .overlay-panel .overlay-right {
+        opacity: 1; /* Show right on non-active */
+    }
+
+    /* Adjust the form panels to stack and reveal */
+    .container.right-panel-active .login-panel {
+        display: none; /* Hide login form when signup is active */
+        animation: none;
+    }
+
+    .container:not(.right-panel-active) .sign-up-panel {
+        display: none; /* Hide signup form when login is active */
+        animation: none;
+    }
+
+    .container.right-panel-active .sign-up-panel,
+    .container:not(.right-panel-active) .login-panel {
+        display: flex; /* Show the active form */
+        opacity: 1;
+        z-index: 5;
+        animation: slideInFromTop 0.5s forwards; /* Add specific animation for mobile form reveal */
+    }
+
+    @keyframes slideInFromTop {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Smaller text for mobile */
+    .overlay-panel h1 {
+        font-size: 2.2em;
+    }
+
+    .overlay-panel p {
+        font-size: 13px;
+        margin: 15px 0 25px;
+    }
+
+    form h2 {
+        font-size: 1.8em;
+    }
+}
 
